@@ -1,0 +1,37 @@
+✅ 1ª Tarefa: Contador com par ou ímpar
+📌 O que foi pedido:
+O usuário digitaria um número.
+
+O programa contaria do 1 até esse número.
+
+A cada número, deveria indicar se era par ou ímpar.
+
+Ao final, deveria mostrar o total de pares e ímpares.
+
+Permitir repetir o programa (do-while com validação da resposta).
+
+✔️ O que você entregou:
+Usou Scanner, while, if, do-while.
+
+Validação para número menor ou igual a 0.
+
+Validação de entrada para repetir (s ou n).
+
+Contagem separada de pares e ímpares.
+
+Código limpo, organizado e funcional.
+
+🧠 Pontos fortes:
+Muito bom uso da lógica condicional e contadores.
+
+Boas práticas de validação.
+
+Clareza na apresentação e fluxo do programa.
+
+📉 Pontos de melhoria:
+Nenhum erro funcional ou estrutural relevante.
+
+Pequena repetição de código poderia ser simplificada (opcional).
+
+📝 Nota final: 9,5 / 10,0
+Ótimo trabalho! Só não levei ao 10,0 porque ainda está em nível introdutório e com estrutura que pode ser otimizada, mas como execução está excelente.
