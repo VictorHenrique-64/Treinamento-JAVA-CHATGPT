@@ -14,10 +14,10 @@ public class Main {
         int idade;
         int DDD;
         int telefone;
-        int respostaPessoas = 0;
+
+        System.out.println("\n\\~\\~\\~\\~\\ SISTEMA DE CADASTRO DE USUÁRIOS /~/~/~/~/\n");
 
         do {
-            System.out.println("\n\\~\\~\\~\\~\\ SISTEMA DE CADASTRO DE USUÁRIOS /~/~/~/~/\n");
             System.out.println("[1] Cadastrar pessoa");
             System.out.println("[2] Listar todas as pessoas");
             System.out.println("[3] Cadastrar pessoa");
@@ -27,12 +27,12 @@ public class Main {
 
             switch (resposta) {
                 case 1:
-                    System.out.println("Insira as informações da pessoa que deseja cadastrar:");
+                    System.out.println("    * Insira as informações da pessoa que deseja cadastrar *");
                     System.out.print("Nome completo: ");
+                    scan.nextLine();
                     nome = scan.nextLine();
                     nomes.add(nome);
 
-                    System.out.println(" ");
                     System.out.print("Idade: ");
                     idade = scan.nextInt();
                     idades.add(idade);
@@ -49,20 +49,31 @@ public class Main {
                     break;
 
                 case 2:
-                    while (respostaPessoas != 1 && respostaPessoas != 2) {
-                        System.out.print("[1] Mostrar apenas o primeiro nome das pessoas");
-                        System.out.print("[2] Mostrar as informações completa das pessoas");
-                        System.out.println("Selecione umas das opções acima: ");
-                        respostaPessoas = scan.nextInt();
+                    if (nomes.isEmpty()) {
+                        System.out.println("    * Nenhuma pessoa foi cadastrada *");
+                    } else {
+                        int respostaCase2 = 0;
+                        while (respostaCase2 != 1 && respostaCase2 != 2) {
+                            System.out.println("[1] Mostrar apenas o primeiro nome das pessoas");
+                            System.out.println("[2] Mostrar as informações completa das pessoas");
+                            System.out.print("Selecione umas das opções acima: ");
+                            respostaCase2 = scan.nextInt();
+                            for (int cont = 1; cont <= nomes.size(); cont++) {
+                                if (respostaCase2 == 1) {
+                                    for (String n : nomes) {
+                                        String primeiroNome = n.split(" ")[0];
+                                        System.out.println(cont + " - " + primeiroNome);
+                                    }
+                                } else if (respostaCase2 == 2) {
+                                    for (int i = 0; i < nomes.size(); i++) {
+                                        System.out.println(cont + " - " + nomes.get(i) + " - Idade: " + idades.get(i) + " - Telefone: (" + DDDs.get(i) + ") 9" + telefones.get(i));
+                                    }
+                                } else {
+                                    System.out.println("'" + respostaCase2 + "' não é uma opção válida, tente novamente.");
+                                    //caso não houver armazenado nenhuma pessoa, printar que não há pessoas para exibir
+                                }
+                            }
 
-                        if (respostaPessoas == 1) {
-                            //String primeiroNome = nome.split(" ")[0];
-                            System.out.println(nomes);
-                        } else if (respostaPessoas == 2) {
-                            //caso não houver armazenado nenhuma pessoa, printar que não há pessoas para exibir
-                            System.out.println("Nome: " + nomes + " - Idade: " + idades + " - Telefone: (" + DDDs + ") 9" + telefones);
-                        } else {
-                            System.out.println("'" + respostaPessoas + " não é uma opção válida, tente novamente.");
                         }
                     }
                     break;
@@ -71,10 +82,11 @@ public class Main {
 
                     break;
             }
-        } while (resposta != 4) ;
+        } while (resposta != 4);
 
-            nomes.clone();
-            scan.close();
+        nomes.clone();
+        scan.close();
 
     }
 }
+//.size()
