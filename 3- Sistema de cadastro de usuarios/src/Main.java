@@ -10,14 +10,15 @@ public class Main {
         ArrayList<Integer> telefones = new ArrayList<Integer>();
 
         int resposta;
-        String nome;
-        int idade;
-        int DDD;
-        int telefone;
+        String nome = "";
+        int idade = 0;
+        int DDD = 0;
+        int telefone = 0;
 
         System.out.println("\n\\~\\~\\~\\~\\ SISTEMA DE CADASTRO DE USUÁRIOS /~/~/~/~/\n");
 
         do {
+            System.out.println("Pessoas cadastradas: " + nomes.size());
             System.out.println("[1] Cadastrar uma nova pessoa");
             System.out.println("[2] Remover uma pessoa já cadastrada");
             System.out.println("[3] Listar todas as pessoas cadastradas");
@@ -28,50 +29,96 @@ public class Main {
 
             switch (resposta) {
                 case 1:
-                    System.out.println("    * Insira as informações da pessoa que deseja cadastrar *");
-                    System.out.print("Nome completo: ");
                     scan.nextLine();
-                    nome = scan.nextLine();
-                    nomes.add(nome);
+                    System.out.println("\n        * INSIRA AS INFORMAÇÕES DA PESSOA QUE DESEJA CADASTRAR *\n");
+                    while (nome.length() <= 2) {
+                        System.out.print("Nome completo: ");
+                        nome = scan.nextLine();
+                        if (nome.length() > 2) {
+                            nomes.add(nome);
+                        } else {
+                            System.out.println("\n          * O NOME DA PESSOA DEVE TER NO MINIMO 2 CARACTERES. TENTE NOVAMENTE *\n");
+                        }
+                    }
 
-                    System.out.print("Idade: ");
-                    idade = scan.nextInt();
-                    idades.add(idade);
+                    while (idade <= 0) {
+                        System.out.print("Idade: ");
+                        idade = scan.nextInt();
+                        if (idade > 0) {
+                            idades.add(idade);
+                        } else {
+                            System.out.println("\n          * A PESSOA DEVE TER NO MINIMO 1 ANO DE IDADE. TENTE NOVAMENTE *\n");
+                        }
+                    }
+                    while (DDD < 10 || DDD > 99) {
+                        System.out.print("DDD: ");
+                        DDD = scan.nextInt();
+                        if (DDD >= 10 && DDD <= 99) {
+                            DDDs.add(DDD);
+                        } else {
+                            System.out.println("\n          * O DDD DEVE CONTER DOIS DIGITOS. TENTE NOVAMENTE *\n");
+                        }
+                    }
+                    while (telefone <= 9999999 || telefone > 99999999) {
+                        System.out.print("telefone: 9");
+                        telefone = scan.nextInt();
+                        if (telefone >= 9999999 && telefone <= 99999999) {
+                            telefones.add(telefone);
+                        } else {
+                            System.out.println("\n         * O TELEFONE DEVE CONTER 8 DIGITOS *\n");
+                        }
+                    }
 
-                    System.out.print("DDD: ");
-                    DDD = scan.nextInt();
-                    DDDs.add(DDD);
-
-                    System.out.print("telefone: 9");
-                    telefone = scan.nextInt();
-                    telefones.add(telefone);
-
-                    System.out.println(" * Pessoa cadastrada com sucesso * ");
+                    System.out.println("\n      * PESSOA CADASTRADA COM SUCESSO * \n");
+                    nome = "";
+                    idade = 0;
+                    DDD = 0;
+                    telefone = 0;
                     break;
 
                 case 2:
                     if (nomes.isEmpty()) {
-                        System.out.println("    * Nenhuma pessoa cadastrada no momento*");
+                        System.out.println("\n    * NENHUMA PESSOA CADASTRADA NO MOMENTO *\n");
                     } else {
-                        for (int i = 0; i < nomes.size(); i++) {
-                            System.out.println(nomes.get(i));
+                        int removePessoa = nomes.size() + 1; //vai contar a partir do 2, pois o 1 remove todos
+                        System.out.println("\n1 - * REMOVER TODOS *");
+                        for (int i = 0; i < removePessoa; i++) {
+                            System.out.println((i + 2) + " - " + nomes.get(i));
+                        }
+                        int respostaCase2 = 0;
+                        while (respostaCase2 != removePessoa && respostaCase2 != 1) {
                             System.out.print("Qual dessas pessoas deseja remover? ");
-                            int respostaCase2 = scan.nextInt();
-                            nomes.remove(respostaCase2);
+                            respostaCase2 = scan.nextInt();
+                            if (respostaCase2 <= removePessoa && respostaCase2 > 1) {
+                                nomes.remove(respostaCase2);
+                                idades.remove(respostaCase2);
+                                DDDs.remove(respostaCase2);
+                                telefones.remove(respostaCase2);
+                                System.out.println("\n          * PESSOA REMOVIDA COM SUCESSO *\n");
+                            } else if (respostaCase2 == 1) {
+                                nomes.clear();
+                                idades.clear();
+                                DDDs.clear();
+                                telefones.clear();
+                                System.out.println("\n          * TODAS AS PESSOAS FORAM REMOVIDAS COM SUCESSO *\n");
+                            } else {
+                                System.out.println("\n          * '" + respostaCase2 + "' NÃO É UMA OPÇÃO VÁLIDA. TENTE NOVAMENTE ");
+                            }
                         }
                     }
                     break;
 
                 case 3:
                     if (nomes.isEmpty()) {
-                        System.out.println("    * Nenhuma pessoa cadastrada no momento*");
+                        System.out.println("\n    * NENHUMA PESSOA CADASTRADA NO MOMENTO *");
                     } else {
                         int respostaCase3 = 0;
                         while (respostaCase3 != 1 && respostaCase3 != 2) {
-                            System.out.println("[1] Mostrar apenas o primeiro nome das pessoas");
+                            System.out.println("\n[1] Mostrar apenas o primeiro nome das pessoas");
                             System.out.println("[2] Mostrar as informações completa das pessoas");
                             System.out.print("Selecione umas das opções acima: ");
                             respostaCase3 = scan.nextInt();
+                            System.out.print("\n");
                             if (respostaCase3 == 1) {
                                 for (int i = 0; i < nomes.size(); i++) {
                                     String primeiroNome = nomes.get(i).split(" ")[0];
@@ -82,22 +129,24 @@ public class Main {
                                     System.out.println((i + 1) + " - " + nomes.get(i) + " - Idade: " + idades.get(i) + " - Telefone: (" + DDDs.get(i) + ") 9" + telefones.get(i));
                                 }
                             } else {
-                                System.out.println("'" + respostaCase3 + "' não é uma opção válida, tente novamente.");
+                                System.out.println("          * '" + respostaCase3 + "' NÃO É UMA OPÇÃO VÁLIDA. TENTE NOVAMENTE *");
                             }
                         }
                     }
+                    System.out.print("\n");
                     break;
 
                 case 4:
                     if (nomes.isEmpty()) {
-                        System.out.println("    * Nenhuma pessoa foi cadastrada *");
+                        System.out.println("\n    * NENHUMA PESSOA CADASTRADA NO MOMENTO *");
                     } else {
                         int respostaCase4 = 0;
                         while (respostaCase4 != 1 && respostaCase4 != 2) {
-                            System.out.println("[1] Mostrar apenas o primeiro nome das pessoas");
+                            System.out.println("\n[1] Mostrar apenas o primeiro nome das pessoas");
                             System.out.println("[2] Mostrar as informações completa das pessoas");
                             System.out.print("Selecione umas das opções acima: ");
                             respostaCase4 = scan.nextInt();
+                            System.out.println("\n");
                             if (respostaCase4 == 1) {
                                 for (int i = 0; i < nomes.size(); i++) {
                                     if (idades.get(i) >= 18) {
@@ -106,26 +155,69 @@ public class Main {
                                     }
                                 }
                             } else if (respostaCase4 == 2) {
+                                int contagem = 1;
                                 for (int i = 0; i < nomes.size(); i++) {
                                     if (idades.get(i) >= 18) {
-                                        System.out.println((i + 1) + " - " + nomes.get(i) + " - Idade: " + idades.get(i) + " - Telefone: (" + DDDs.get(i) + ") 9" + telefones.get(i));
+                                        System.out.println(contagem + " - " + nomes.get(i) + " - Idade: " + idades.get(i) + " - Telefone: (" + DDDs.get(i) + ") 9" + telefones.get(i));
+                                    contagem++;
                                     }
                                 }
                             } else {
-                                System.out.println("'" + respostaCase4 + "' não é uma opção válida, tente novamente.");
+                                System.out.println("\n          * '"  + respostaCase4 +  "' NÃO É UMA OPÇÃO VÁLIDA. TENTE NOVAMENTE *\n");
                             }
                         }
                     }
+                    System.out.print("\n");
                     break;
 
                 case 5:
                     break;
 
+                case 64:
+                    //Estou testando esse codigo varias vezes e todas as vezes eu tenho que cadastrar pessoas para fazer os teste,
+                    //mas isso já está chato demais, por isso criei a case 64. Todas as vezes que eu selecionar esse
+                    //número, ele irá me dar 6 usuários. É tipo um cheat.
+
+                    nomes.add("Victor Henrique Ramos Jacó"); // 1
+                    idades.add(21);
+                    DDDs.add(31);
+                    telefones.add(72562536);
+
+                    nomes.add("Silvana Bitencourt Ramos"); // 2
+                    idades.add(48);
+                    DDDs.add(31);
+                    telefones.add(99592015);
+
+                    nomes.add("Matusalém Ramos Jacó");  // 3
+                    idades.add(49);
+                    DDDs.add(31);
+                    telefones.add(85548497);
+
+                    nomes.add("Davi Augusto Bitencourt"); // 4
+                    idades.add(14);
+                    DDDs.add(31);
+                    telefones.add(87208418);
+
+                    nomes.add("Carlos Augusto César"); // 5
+                    idades.add(17);
+                    DDDs.add(15);
+                    telefones.add(71874090);
+
+                    nomes.add("Paulo Ricardo dos Santos"); // 6
+                    idades.add(18);
+                    DDDs.add(35);
+                    telefones.add(72562536);
+
+                    System.out.println("\n          * PESSOAS CADASTRADAS COM SUCESSO * \n");
+                    break;
+
                 default:
-                    System.out.println("'" + resposta + "' não é uma opção válida, tente novamente.");
+                    System.out.println("\n          * '" + resposta + "' NÃO É UMA OPÇÃO VÁLIDA. TENTE NOVAMENTE *\n");
                     break;
             }
         } while (resposta != 5);
+
+        System.out.println("\n          * ATÉ A PRÓXIMA! *");
 
         nomes.clone();
         scan.close();
