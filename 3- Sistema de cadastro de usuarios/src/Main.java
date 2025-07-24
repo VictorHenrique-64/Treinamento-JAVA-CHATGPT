@@ -40,32 +40,47 @@ public class Main {
                             System.out.println("\n          * O NOME DA PESSOA DEVE TER NO MINIMO 2 CARACTERES. TENTE NOVAMENTE *\n");
                         }
                     }
-
                     while (idade <= 0) {
                         System.out.print("Idade: ");
-                        idade = scan.nextInt();
-                        if (idade > 0) {
-                            idades.add(idade);
+                        if (scan.hasNextInt()) {
+                            idade = scan.nextInt();
+                            if (idade > 0) {
+                                idades.add(idade);
+                            } else {
+                                System.out.println("\n          * A PESSOA DEVE TER NO MINIMO 1 ANO DE IDADE. TENTE NOVAMENTE *\n");
+                            }
                         } else {
-                            System.out.println("\n          * A PESSOA DEVE TER NO MINIMO 1 ANO DE IDADE. TENTE NOVAMENTE *\n");
+                            System.out.println("\n          * A IDADE NÃO DEVE CONTER LETRAS, APENAS NÚMERO. TENTE NOVAMENTE *\n");
+                            scan.next();
                         }
                     }
+
                     while (DDD < 10 || DDD > 99) {
                         System.out.print("DDD: ");
-                        DDD = scan.nextInt();
-                        if (DDD >= 10 && DDD <= 99) {
-                            DDDs.add(DDD);
+                        if (scan.hasNextInt()) {
+                            DDD = scan.nextInt();
+                            if (DDD >= 10 && DDD <= 99) {
+                                DDDs.add(DDD);
+                            } else {
+                                System.out.println("\n          * O DDD DEVE CONTER DOIS DIGITOS. TENTE NOVAMENTE *\n");
+                            }
                         } else {
-                            System.out.println("\n          * O DDD DEVE CONTER DOIS DIGITOS. TENTE NOVAMENTE *\n");
+                            System.out.println("\n          * O DDD NÃO DEVE CONTER LETRAS, APENAS NÚMERO. TENTE NOVAMENTE *\n");
+                            scan.next();
                         }
                     }
                     while (telefone <= 9999999 || telefone > 99999999) {
                         System.out.print("telefone: 9");
-                        telefone = scan.nextInt();
-                        if (telefone >= 9999999 && telefone <= 99999999) {
-                            telefones.add(telefone);
+                        if (scan.hasNextInt()) {
+                            telefone = scan.nextInt();
+                            if (telefone >= 9999999 && telefone <= 99999999) {
+                                telefones.add(telefone);
+                            } else {
+                                System.out.println("\n         * O TELEFONE DEVE CONTER 8 DIGITOS *\n");
+                            }
                         } else {
-                            System.out.println("\n         * O TELEFONE DEVE CONTER 8 DIGITOS *\n");
+                            System.out.println("\n          * O TELEFONE NÃO DEVE CONTER LETRAS, APENAS NÚMERO. TENTE NOVAMENTE *\n");
+                            scan.next();
                         }
                     }
 
@@ -80,29 +95,30 @@ public class Main {
                     if (nomes.isEmpty()) {
                         System.out.println("\n    * NENHUMA PESSOA CADASTRADA NO MOMENTO *\n");
                     } else {
-                        int removePessoa = nomes.size() + 1; //vai contar a partir do 2, pois o 1 remove todos
                         System.out.println("\n1 - * REMOVER TODOS *");
-                        for (int i = 0; i < removePessoa; i++) {
+                        for (int i = 0; i < nomes.size(); i++) {
                             System.out.println((i + 2) + " - " + nomes.get(i));
                         }
                         int respostaCase2 = 0;
-                        while (respostaCase2 != removePessoa && respostaCase2 != 1) {
+                        int totalPessoasCase2 = nomes.size() + 1; //vai contar a partir do 2, pois o 1 remove todos
+                        while (respostaCase2 > totalPessoasCase2 || respostaCase2 < 1) {
                             System.out.print("Qual dessas pessoas deseja remover? ");
                             respostaCase2 = scan.nextInt();
-                            if (respostaCase2 <= removePessoa && respostaCase2 > 1) {
-                                nomes.remove(respostaCase2);
-                                idades.remove(respostaCase2);
-                                DDDs.remove(respostaCase2);
-                                telefones.remove(respostaCase2);
-                                System.out.println("\n          * PESSOA REMOVIDA COM SUCESSO *\n");
-                            } else if (respostaCase2 == 1) {
+                            if (respostaCase2 == 1) {
                                 nomes.clear();
                                 idades.clear();
                                 DDDs.clear();
                                 telefones.clear();
                                 System.out.println("\n          * TODAS AS PESSOAS FORAM REMOVIDAS COM SUCESSO *\n");
+                            } else if (respostaCase2 > 1 && respostaCase2 <= totalPessoasCase2) {
+                                int indice = respostaCase2 - 2;
+                                nomes.remove(indice);
+                                idades.remove(indice);
+                                DDDs.remove(indice);
+                                telefones.remove(indice);
+                                System.out.println("\n          * PESSOA REMOVIDA COM SUCESSO *\n");
                             } else {
-                                System.out.println("\n          * '" + respostaCase2 + "' NÃO É UMA OPÇÃO VÁLIDA. TENTE NOVAMENTE ");
+                                System.out.println("\n          * '" + respostaCase2 + "' É UMA OPÇÃO VAZIA. TENTE NOVAMENTE COM UMA OPÇÃO VÁLIDA\n");
                             }
                         }
                     }
@@ -146,24 +162,26 @@ public class Main {
                             System.out.println("[2] Mostrar as informações completa das pessoas");
                             System.out.print("Selecione umas das opções acima: ");
                             respostaCase4 = scan.nextInt();
-                            System.out.println("\n");
+                            System.out.print("\n");
                             if (respostaCase4 == 1) {
+                                int cont = 1;
                                 for (int i = 0; i < nomes.size(); i++) {
                                     if (idades.get(i) >= 18) {
                                         String primeiroNome = nomes.get(i).split(" ")[0];
-                                        System.out.println((i + 1) + " - " + primeiroNome);
+                                        System.out.println(cont + " - " + primeiroNome);
+                                        cont++;
                                     }
                                 }
                             } else if (respostaCase4 == 2) {
-                                int contagem = 1;
+                                int cont = 1;
                                 for (int i = 0; i < nomes.size(); i++) {
                                     if (idades.get(i) >= 18) {
-                                        System.out.println(contagem + " - " + nomes.get(i) + " - Idade: " + idades.get(i) + " - Telefone: (" + DDDs.get(i) + ") 9" + telefones.get(i));
-                                    contagem++;
+                                        System.out.println(cont + " - " + nomes.get(i) + " - Idade: " + idades.get(i) + " - Telefone: (" + DDDs.get(i) + ") 9" + telefones.get(i));
+                                        cont++;
                                     }
                                 }
                             } else {
-                                System.out.println("\n          * '"  + respostaCase4 +  "' NÃO É UMA OPÇÃO VÁLIDA. TENTE NOVAMENTE *\n");
+                                System.out.println("          * '" + respostaCase4 + "' NÃO É UMA OPÇÃO VÁLIDA. TENTE NOVAMENTE *");
                             }
                         }
                     }
@@ -174,9 +192,8 @@ public class Main {
                     break;
 
                 case 64:
-                    //Estou testando esse codigo varias vezes e todas as vezes eu tenho que cadastrar pessoas para fazer os teste,
-                    //mas isso já está chato demais, por isso criei a case 64. Todas as vezes que eu selecionar esse
-                    //número, ele irá me dar 6 usuários. É tipo um cheat.
+                    //Estou testando este código várias vezes e, em todas elas, preciso cadastrar pessoas para realizar os testes, e isso já está chato demais.
+                    //Por isso, criei a case 64. Todas as vezes que eu selecionar esse número, ele irá cadastrar automaticamente 6 usuários. É tipo um cheat.
 
                     nomes.add("Victor Henrique Ramos Jacó"); // 1
                     idades.add(21);
@@ -219,9 +236,8 @@ public class Main {
 
         System.out.println("\n          * ATÉ A PRÓXIMA! *");
 
-        nomes.clone();
+        nomes.clone(); //nem sei porque coloquei isso kkkkkkkk, mas vou deixar aí porque entreguei para o chatGPT dessa forma
         scan.close();
 
     }
 }
-//.size()
