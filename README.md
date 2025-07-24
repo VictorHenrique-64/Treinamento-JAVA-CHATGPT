@@ -1,1 +1,1 @@
-Cada tarefa possui um bloco de notas com a nota do chatGPT sobre minhas tarefas.
+Cada tarefa possui um documento de texto .txt com a nota do chatGPT sobre minhas tarefas.
