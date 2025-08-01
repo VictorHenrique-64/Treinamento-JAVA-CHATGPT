@@ -198,32 +198,32 @@ public class Main {
                     nomes.add("Victor Henrique Ramos Jacó"); // 1
                     idades.add(21);
                     DDDs.add(31);
-                    telefones.add(72562536);
+                    telefones.add(72727272);
 
                     nomes.add("Silvana Bitencourt Ramos"); // 2
                     idades.add(48);
                     DDDs.add(31);
-                    telefones.add(99592015);
+                    telefones.add(99999999);
 
                     nomes.add("Matusalém Ramos Jacó");  // 3
                     idades.add(49);
                     DDDs.add(31);
-                    telefones.add(85548497);
+                    telefones.add(85858585);
 
                     nomes.add("Davi Augusto Bitencourt"); // 4
                     idades.add(14);
                     DDDs.add(31);
-                    telefones.add(87208418);
+                    telefones.add(87878787);
 
                     nomes.add("Carlos Augusto César"); // 5
                     idades.add(17);
                     DDDs.add(15);
-                    telefones.add(71874090);
+                    telefones.add(71717171);
 
                     nomes.add("Paulo Ricardo dos Santos"); // 6
                     idades.add(18);
                     DDDs.add(35);
-                    telefones.add(72562536);
+                    telefones.add(36363636);
 
                     System.out.println("\n          * PESSOAS CADASTRADAS COM SUCESSO * \n");
                     break;
