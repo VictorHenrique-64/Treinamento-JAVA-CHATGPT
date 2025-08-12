@@ -30,90 +30,95 @@ public class Main {
                 switch (dificuldade) {
 
                     case 5:
-                        int limitePersonalizado;
-                        int chancesPersonalizado;
-                        System.out.print("\nSelecione o limite do jogo (o limite deve ser no minimo 50): ");
-                        if (scan.hasNextInt()) {
-                            limitePersonalizado = scan.nextInt();
-                            while (limitePersonalizado < 50) {
-                                System.out.println("\n *** O LIMITE DEVE SER NO MINIMO 50 ***");
-                                System.out.print("Selecione o limite do jogo: ");
+                        int limitePersonalizado = 0;
+                        int chancesPersonalizado = -1;
+                        while (limitePersonalizado < 50) {
+                            System.out.print("\nSelecione o limite do jogo (o limite deve ser no minimo 50): ");
+                            if (scan.hasNextInt()) {
                                 limitePersonalizado = scan.nextInt();
-                            }
-                            System.out.print("Selecione quantas chances irá ter no jogo (Chances infinitas = 0): ");
-                            chancesPersonalizado = scan.nextInt();
-                            double random = Math.random();
-                            int numeroSecreto = (int) (random * limitePersonalizado + 1);
-                            resposta = 0;
-                            if (cheat) {
-                                System.out.println("\n *** DEV MODE: " + numeroSecreto + " *** \n");
-                            }
-                            while (resposta != numeroSecreto && chancesPersonalizado == 0) {
-                                System.out.println("Chances restantes: INFINITO.");
-                                System.out.print("Escolha um número de 1 até " + limitePersonalizado + ": ");
-                                resposta = scan.nextInt();
-                                if (resposta < numeroSecreto) {
-                                    System.out.println("O número secreto é maior");
-                                    tentativas.add(resposta);
-                                } else if (resposta > numeroSecreto) {
-                                    System.out.println("O número secreto é menor");
-                                    tentativas.add(resposta);
-                                } else if (resposta <= 0 || resposta > limitePersonalizado) {
-                                    System.out.println("Você deve selecionar somente os número de 1 à " + limitePersonalizado + ". Tente novamente\n");
-                                    System.out.print("Escolha um número de 1 até " + limitePersonalizado + ": ");
-                                } else {
-                                    System.out.println("\nParabéns, você acertou o número secreto!");
-                                    System.out.println("Número secreto: " + numeroSecreto);
-                                    System.out.println("Quantidade de tentativas: " + tentativas.size());
-                                    System.out.print("Suas tentativas: ");
-                                    for (int i = 0; i < tentativas.size(); i++) {
-                                        System.out.print(tentativas.get(i) + ", ");
-                                    }
-                                    System.out.print(resposta + ".\n");
+                                if (limitePersonalizado < 50) {
+                                    System.out.println("\n *** O LIMITE DEVE SER NO MINIMO 50 ***");
                                 }
-                            }
-                            while (resposta != numeroSecreto && chancesPersonalizado > 0) {
-                                System.out.println("Chances restantes: " + chancesPersonalizado + ".");
-                                System.out.print("Escolha um número de 1 até " + limitePersonalizado + ": ");
-                                resposta = scan.nextInt();
-                                if (resposta < numeroSecreto) {
-                                    System.out.println("O número secreto é maior");
-                                    tentativas.add(resposta);
-                                    chancesPersonalizado--;
-                                } else if (resposta > numeroSecreto) {
-                                    System.out.println("O número secreto é menor");
-                                    tentativas.add(resposta);
-                                    chancesPersonalizado--;
-                                } else if (resposta <= 0 || resposta > limitePersonalizado) {
-                                    System.out.println("Você deve selecionar somente os número de 1 à " + limitePersonalizado + ". Tente novamente\n");
-                                    System.out.print("Escolha um número de 1 até " + limitePersonalizado + ": ");
-                                } else {
-                                    System.out.println("\nParabéns, você acertou o número secreto!");
-                                    System.out.println("Número secreto: " + numeroSecreto);
-                                    System.out.println("Quantidade de tentativas: " + (tentativas.size() + 1));
-                                    System.out.print("Suas tentativas: ");
-                                    for (int i = 0; i < tentativas.size(); i++) {
-                                        System.out.print(tentativas.get(i) + ", ");
+                                while (chancesPersonalizado < 0) {
+                                    System.out.print("Selecione quantas chances irá ter no jogo (Chances infinitas = 0): ");
+                                    if (scan.hasNextInt()) {
+                                        chancesPersonalizado = scan.nextInt();
+                                        double random = Math.random();
+                                        int numeroSecreto = (int) (random * limitePersonalizado + 1);
+                                        resposta = 0;
+                                        if (cheat) {
+                                            System.out.println("\n *** DEV MODE: " + numeroSecreto + " *** \n");
+                                        }
+                                        while (resposta != numeroSecreto && chancesPersonalizado == 0) {
+                                            System.out.println("Chances restantes: INFINITO.");
+                                            System.out.print("Escolha um número de 1 até " + limitePersonalizado + ": ");
+                                            resposta = scan.nextInt();
+                                            if (resposta < numeroSecreto) {
+                                                System.out.println("O número secreto é maior");
+                                                tentativas.add(resposta);
+                                            } else if (resposta > numeroSecreto) {
+                                                System.out.println("O número secreto é menor");
+                                                tentativas.add(resposta);
+                                            } else if (resposta <= 0 || resposta > limitePersonalizado) {
+                                                System.out.println("Você deve selecionar somente os número de 1 à " + limitePersonalizado + ". Tente novamente\n");
+                                                System.out.print("Escolha um número de 1 até " + limitePersonalizado + ": ");
+                                            } else {
+                                                System.out.println("\nParabéns, você acertou o número secreto!");
+                                                System.out.println("Número secreto: " + numeroSecreto);
+                                                System.out.println("Quantidade de tentativas: " + (tentativas.size() + 1));
+                                                System.out.print("Suas tentativas: ");
+                                                for (int i = 0; i < tentativas.size(); i++) {
+                                                    System.out.print(tentativas.get(i) + ", ");
+                                                }
+                                                System.out.print(resposta + ".\n");
+                                            }
+                                        }
+                                        while (resposta != numeroSecreto && chancesPersonalizado > 0) {
+                                            System.out.println("\nChances restantes: " + chancesPersonalizado + ".");
+                                            System.out.print("Escolha um número de 1 até " + limitePersonalizado + ": ");
+                                            resposta = scan.nextInt();
+                                            if (resposta <= 0 || resposta > limitePersonalizado) {
+                                                System.out.println("\nVocê deve selecionar somente os número de 1 à " + limitePersonalizado + ". Tente novamente");
+                                            } else if (resposta < numeroSecreto) {
+                                                System.out.println("O número secreto é maior");
+                                                tentativas.add(resposta);
+                                                chancesPersonalizado--;
+                                            } else if (resposta > numeroSecreto) {
+                                                System.out.println("O número secreto é menor");
+                                                tentativas.add(resposta);
+                                                chancesPersonalizado--;
+                                            } else {
+                                                System.out.println("\nParabéns, você acertou o número secreto!");
+                                                System.out.println("Número secreto: " + numeroSecreto);
+                                                System.out.println("Quantidade de tentativas: " + (tentativas.size() + 1));
+                                                System.out.print("Suas tentativas: ");
+                                                for (int i = 0; i < tentativas.size(); i++) {
+                                                    System.out.print(tentativas.get(i) + ", ");
+                                                }
+                                                System.out.println(resposta);
+                                                tentativas.clear();
+                                            }
+                                            if (chancesPersonalizado == 0) {
+                                                System.out.println("GAME OVER");
+                                                System.out.println("Número secreto: " + numeroSecreto);
+                                                System.out.println("Quantidade de tentativas: " + tentativas.size());
+                                                System.out.print("Suas tentativas: ");
+                                                for (int i = 0; i < (tentativas.size() - 1); i++) {
+                                                    System.out.print(tentativas.get(i) + ", ");
+                                                }
+                                                System.out.println(resposta + ".");
+                                                tentativas.clear();
+                                            }
+                                        }
+                                    } else {
+                                        System.out.println("\n *** A RESPOSTA DEVE SER UM NÚMERO. TENTE NOVAMENTE ***");
+                                        scan.next();
                                     }
-                                    System.out.println(resposta);
-                                    tentativas.clear();
                                 }
-                                if (chancesPersonalizado == 0) {
-                                    System.out.println("GAME OVER");
-                                    System.out.println("Número secreto: " + numeroSecreto);
-                                    System.out.println("Quantidade de tentativas: " + tentativas.size());
-                                    System.out.print("Suas tentativas: ");
-                                    for (int i = 0; i < (tentativas.size() - 1); i++) {
-                                        System.out.print(tentativas.get(i) + ", ");
-                                    }
-                                    System.out.println(resposta + ".");
-                                    tentativas.clear();
-                                }
+                            } else {
+                                System.out.println("\n *** A RESPOSTA DEVE SER UM NÚMERO. TENTE NOVAMENTE ***");
+                                scan.next();
                             }
-                        } else {
-                            System.out.println("\n *** A RESPOSTA DEVE SER UM NÚMERO. TENTE NOVAMENTE ***");
-                            limitePersonalizado = scan.nextInt();
-                            scan.next();
                         }
                         break;
 
@@ -125,6 +130,7 @@ public class Main {
                         }
                 }
                 if (dificuldade != 64) {
+                    tentativas.clear();
                     System.out.print("Gostaria de jogar novamente? (s/n): ");
                     repetir = scan.next().charAt(0);
                     while (repetir != 's' && repetir != 'n' && repetir != 'S' && repetir != 'N') {
